@@ -13,7 +13,8 @@ export default function App() {
       <Stack.Screen 
         name="Home"
         component={Home}
-        options={{ title: 'Drone Management' }}/>
+        options={ { headerShown: false } }
+      />
       <Stack.Screen
         name="Registro"
         component={Registro}
