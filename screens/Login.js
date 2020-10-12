@@ -3,7 +3,14 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, ImageBackground } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 
-export const Registro = ({ navigation }) => {
+export const Registro = ({ route }) => {
+  console.log(route)
+
+  async function handleToken() {
+    const token = await AsyncStorage.getItem('token')
+    console.log(token)
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -21,6 +28,9 @@ export const Registro = ({ navigation }) => {
             style={styles.textRegister}
           >Registrarse</Text>
         </TouchableOpacity>
+        <View style={styles.containertextElevate}>
+          <Text style={[styles.textElevate]}>Eleva tus proyectos a otro nivel</Text>
+        </View>
       </ImageBackground>
     </View>
   )
@@ -63,15 +73,6 @@ const styles = StyleSheet.create({
     minWidth: 88,
     paddingLeft: 16,
     paddingRight: 16
-  },
-  textHeader: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-  textRegister: {
-    color: "#fff",
-    fontSize: 14
   }
 });
 

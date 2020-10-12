@@ -1,75 +1,120 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Image, ImageBackground } from "react-native";
-import MaterialButtonViolet from "../src/components/MaterialButtonViolet";
-import MaterialButtonViolet1 from "../src/components/MaterialButtonViolet1";
-import MaterialHeader1 from "../src/components/MaterialHeader1";
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
+import { StyleSheet, TouchableOpacity, View, Text, ImageBackground } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 export const Home = ({ navigation }) => {
-  async function handleLogin() {
-    const token = 'soyuntokenfeliz'
-    await AsyncStorage.setItem('token', token)
-  }
-  const image = { uri: "https://www.smartcitiesworld.net/AcuCustom/Sitename/DAM/010/opinion-nov2017-transport-dronescartoon_Cropped.jpg" };
+
   return (
     <View style={styles.container}>
-      <View style={styles.imageStack}>
-        <ImageBackground
-          source={require("../src/data/pic(4).png")}
-          resizeMode="contain"
-          style={styles.image}
-          imageStyle={styles.image_imageStyle}
-        >
-          <MaterialButtonViolet
-            style={styles.materialButtonViolet}
-          ></MaterialButtonViolet>
-          <MaterialButtonViolet1
-            style={styles.materialButtonViolet1}
-          ></MaterialButtonViolet1>
-        </ImageBackground>
-        <MaterialHeader1 style={styles.materialHeader1}></MaterialHeader1>
+      <StatusBar style="light" />
+      <View style={styles.containerHeader}>
+        <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
       </View>
+      <ImageBackground
+        source={require("../src/data/pic(4).png")}
+        resizeMode="cover"
+        style={styles.imageBackground}
+      >
+        <TouchableOpacity style={[styles.containerButtonRegister]}>
+          <Text 
+            onPress={() => navigation.navigate('Registro')} 
+            style={styles.textRegister}
+          >Registrarse</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.containerButtonLogin]}>
+          <Text 
+            onPress={() => navigation.navigate('Registro')} 
+            style={styles.textRegister}
+          >Iniciar Sesión</Text>
+        </TouchableOpacity>
+        <View style={styles.containertextElevate}>
+          <Text style={[styles.textElevate]}>Eleva tus proyectos a otro nivel</Text>
+        </View>
+      </ImageBackground>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'rgba(21,42,113,1)',
+    flexDirection: 'column'
   },
-  image: {
-    top: 19,
-    left: 0,
-    width: 438,
-    height: 689,
-    position: "absolute"
+  containerHeader: {
+    flex: 1,
+    backgroundColor: 'rgba(21,42,113,1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 25
   },
-  image_imageStyle: {},
-  materialButtonViolet: {
+  imageBackground: {
+    flex: 9,
+    alignItems: "center"
+  },
+  containerButtonRegister: {
     height: 51,
     width: 176,
     backgroundColor: "rgba(21,42,113,1)",
-    marginTop: 444,
-    marginLeft: 133
+    marginTop: 440,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 16,
+    paddingRight: 16
   },
-  materialButtonViolet1: {
+  containerButtonLogin: {
     height: 51,
     width: 176,
     backgroundColor: "rgba(21,42,113,1)",
     marginTop: 20,
-    marginLeft: 133
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 16,
+    paddingRight: 16
   },
-  materialHeader1: {
-    height: 59,
-    width: 360,
-    position: "absolute",
-    left: 46,
-    top: 0
+  containertextElevate: {
+    marginTop: 20,
+    backgroundColor: 'rgba(52, 52, 52, 0)'
   },
-  imageStack: {
-    width: 438,
-    height: 708,
-    marginLeft: -46
+  textHeader: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  textRegister: {
+    color: "#fff",
+    fontSize: 14
+  },
+  textLogin: {
+    color: "#fff",
+    fontSize: 14
+  },
+  textElevate: {
+    color: "#fff",
+    fontSize: 16,
+    fontStyle: 'italic'
   }
-});
-
-export default Home;
+}); 

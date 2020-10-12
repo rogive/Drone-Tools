@@ -11,14 +11,14 @@ export default function App() {
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen 
-        name="Home"
+        name='Home'
         component={Home}
         options={ { headerShown: false } }
       />
       <Stack.Screen
-        name="Registro"
+        name='Registro'
         component={Registro}
-        options={{ title: 'Registro' }} />
+        options={ { headerShown: false } } />
     </Stack.Navigator>
   </NavigationContainer>
   );
