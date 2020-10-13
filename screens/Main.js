@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, View, Text, ImageBackground,Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 
@@ -27,9 +27,10 @@ export const Main = ({ navigation, route}) => {
         <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
       </View>
       <ImageBackground
-        source={require("../src/data/pic(3).jpeg")}
+        source={require("../src/data/pic(4).jpg")}
         resizeMode="cover"
         style={styles.imageBackground}
+        //#d9f6fe
       >
         <Image 
           style={styles.containerImageProfile}

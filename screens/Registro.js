@@ -11,7 +11,7 @@ export const Registro = ({ navigation }) => {
         <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
       </View>
       <ImageBackground
-        source={require("../src/data/pic(4).png")}
+        source={require("../src/data/pic(4).jpg")}
         resizeMode="cover"
         style={styles.imageBackground}
       >

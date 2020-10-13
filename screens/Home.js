@@ -1,31 +1,19 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, View, Text, ImageBackground } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 
 export const Home = ({ navigation }) => {
-/*   const [signedIn, setSignedIn] = useState(false)
-  const [name, setName] = useState('')
-  const [photoUrl, setPhotoUrl] = useState('') */
-  console.log(process.env.REACT_NATIVE_ANDROID_CLIENT_ID)
   async function signInGmail() {
     try {
       const result = await Google.logInAsync({
-        androidClientId: process.env.REACT_NATIVE_ANDROID_CLIENT_ID,
-        //process.env.ANDROID_CLIENT_ID
-        //iosClientId: YOUR_CLIENT_ID_HERE,
+        androidClientId: process.env.ANDROID_CLIENT_ID,
         scopes: ['profile', 'email'],
       });
-  
       if (result.type === 'success') {
         //return result.accessToken;
         console.log(result.accessToken)
-        console.log(result)
-        console.dir(result)
-/*         setSignedIn(true)
-        setName(result.user.name)
-        setPhotoUrl(result.user.photoUrl) */
         navigation.navigate('Main', {
           signedIn: true,
           name: result.user.givenName,
@@ -34,11 +22,9 @@ export const Home = ({ navigation }) => {
           email: result.user.email
         })
       } else {
-        //return { cancelled: true };
-        console.log("Cancelado")
+        navigation.navigate('Home')
       }
     } catch (e) {
-      //return { error: true };
       console.log("error: ", e)
     }
   }
@@ -50,18 +36,25 @@ export const Home = ({ navigation }) => {
         <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
       </View>
       <ImageBackground
-        source={require("../src/data/pic(4).png")}
+        source={require("../src/data/pic(1).png")}
         resizeMode="cover"
         style={styles.imageBackground}
       >
         <TouchableOpacity style={[styles.containerButtonRegisterGmail]}>
-          <Text 
-            onPress={() => {
-              signInGmail()
-              //navigation.navigate('Main')
-            }} 
-            style={styles.textRegisterGmail}
-          >Registrarse con Gmail</Text>
+          <View style={styles.containerImageSigninGmail}>
+            <View style={{}}>
+              <Image 
+                style={styles.imageGmail}
+                source={require("../src/data/gmail-icon.png")}
+              />
+            </View>
+            <View style={{alignItems:'center', justifyContent: 'center', width: 170}}>
+              <Text 
+                onPress={() => { signInGmail() }} 
+                style={styles.textRegisterGmail}
+              >Registrarse con Google</Text>
+            </View>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.containerButtonRegister]}>
           <Text 
@@ -96,13 +89,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 25
   },
+  containerImageSigninGmail: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  imageGmail: {
+    width: 49,
+    height: 49,
+    left: 0
+  },
   imageBackground: {
     flex: 9,
     alignItems: "center"
   },
   containerButtonRegisterGmail: {
     height: 51,
-    width: 176,
+    width: 220,
     backgroundColor: "rgba(21,42,113,1)",
     marginTop: 440,
     justifyContent: "center",
@@ -118,12 +120,12 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 2,
     minWidth: 88,
-    paddingLeft: 16,
+    paddingLeft: 1,
     paddingRight: 16
   },
   containerButtonRegister: {
     height: 51,
-    width: 176,
+    width: 220,
     backgroundColor: "rgba(21,42,113,1)",
     marginTop: 20,
     justifyContent: "center",
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
   },
   containerButtonLogin: {
     height: 51,
-    width: 176,
+    width: 220,
     backgroundColor: "rgba(21,42,113,1)",
     marginTop: 20,
     justifyContent: "center",
@@ -178,7 +180,9 @@ const styles = StyleSheet.create({
   },
   textRegisterGmail: {
     color: "#fff",
-    fontSize: 14
+    fontSize: 14,
+    alignItems: 'center',
+    fontWeight: 'bold'
   },
   textLogin: {
     color: "#fff",
