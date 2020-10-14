@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
+import * as Facebook from 'expo-facebook'
+import Expo, { Constants } from 'expo'
 
 export const Home = ({ navigation }) => {
   async function signInGmail() {
@@ -29,6 +31,52 @@ export const Home = ({ navigation }) => {
     }
   }
 
+  async function signInFacebook() {
+    try {
+      console.log('prueba1')
+      await Facebook.initializeAsync({
+        appId: '368470534352273',
+      });
+      const resultFacebook = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ['public_profile', 'email'],
+      })
+      const {type} = resultFacebook
+/*       {
+        type,
+        token,
+        expirationDate,
+        permissions,
+        declinedPermissions,
+       */
+
+/*       const resultFacebook = await Expo.Facebook.logInWithReadPermissionsAsync('368470534352273', {
+        permissions: ['public_profile', 'email', 'user_friends'],
+      }) */
+      if (type === 'success') {
+        //return resultFacebook.accessToken;
+        console.log(resultFacebook)
+        const { token } = resultFacebook
+        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+        const algo = (await response.json().email)
+        console.log(algo)
+
+/*         Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`); */
+/*         navigation.navigate('Main', {
+          signedIn: true,
+          name: resultFacebook.user.givenName,
+          lastName: resultFacebook.user.familyName,
+          photoUrl: resultFacebook.user.photoUrl,
+          email: resultFacebook.user.email
+        }) */
+      } else {
+/*         navigation.navigate('Home') */
+      }
+    } catch (e) {
+      console.log("error: ", e)
+    }
+  }
+
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -50,7 +98,7 @@ export const Home = ({ navigation }) => {
             </View>
             <View style={{alignItems:'center', justifyContent: 'center', width: 170}}>
               <Text 
-                onPress={() => { signInGmail() }} 
+                onPress={() => { signInFacebook() }} 
                 style={styles.textRegisterGmail}
               >Registrarse con Google</Text>
             </View>

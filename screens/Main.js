@@ -2,14 +2,12 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
-import * as Google from 'expo-google-app-auth'
 
 export const Main = ({ navigation, route}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
   //360 780
-
 
   useEffect( () => {
     setSignedIn(route.params.signedIn)
@@ -30,7 +28,6 @@ export const Main = ({ navigation, route}) => {
         source={require("../src/data/pic(4).jpg")}
         resizeMode="cover"
         style={styles.imageBackground}
-        //#d9f6fe
       >
         <Image 
           style={styles.containerImageProfile}
