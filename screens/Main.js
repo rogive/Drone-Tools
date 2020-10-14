@@ -6,16 +6,15 @@ import AsyncStorage from '@react-native-community/async-storage'
 export const Main = ({ navigation, route}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
+  const [lastname, setLastName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
   //360 780
 
   useEffect( () => {
     setSignedIn(route.params.signedIn)
     setName(route.params.name)
+    setLastName(route.params.lastName)
     setPhotoUrl(route.params.photoUrl)
-    console.log(signedIn)
-    console.log(name)
-    console.log(photoUrl)
   }, [])
 
   return (
@@ -37,7 +36,7 @@ export const Main = ({ navigation, route}) => {
           <Text 
             onPress={() => console.log("Boton presionado")} 
             style={styles.textProfile}
-          >{name}</Text>
+          >{name + " " + lastname}</Text>
         </TouchableOpacity>
       </ImageBackground>
     </View>
