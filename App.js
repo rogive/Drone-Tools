@@ -1,9 +1,9 @@
-import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import {Home} from './screens/Home'
-import {Registro} from './screens/Registro'
+import React from 'react'
 import {Main} from './screens/Main'
+import {Registro} from './screens/Registro'
+import {Lateral} from './screens/Lateral'
 
 const Stack = createStackNavigator()
 
@@ -12,8 +12,8 @@ export default function App() {
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen 
-        name='Home'
-        component={Home}
+        name='Main'
+        component={Main}
         options={ { headerShown: false } }
       />
       <Stack.Screen
@@ -22,8 +22,8 @@ export default function App() {
         options={ { headerShown: false } }
       />
       <Stack.Screen
-        name='Main'
-        component={Main}
+        name='Lateral'
+        component={Lateral}
         options={ { headerShown: false } } 
       />
     </Stack.Navigator>
