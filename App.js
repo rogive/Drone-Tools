@@ -9,7 +9,7 @@ const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    <NavigationContainer>
+  <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen 
         name='Main'

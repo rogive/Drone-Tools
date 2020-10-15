@@ -7,7 +7,7 @@ import {Projects} from './Projects'
 import {Checklists} from './Checklists'
 import {Flightlogs} from './Flightlogs'
 
-export const Home = ({route}) => {
+export const Home = ({route, navigation}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')

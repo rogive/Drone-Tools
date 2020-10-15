@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from
 import AsyncStorage from '@react-native-community/async-storage'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
-export const Profile = ({route}) => {
+export const Profile = ({route, navigation}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')
@@ -26,7 +26,7 @@ export const Profile = ({route}) => {
       <View style={styles.containerBody}>
         <TouchableOpacity style={[styles.containerProfile]}>
           <Text 
-            onPress={() => console.log("Boton presionado")} 
+            onPress={() => navigation.openDrawer()} 
             style={styles.textProfile}
           >Ivan</Text>
         </TouchableOpacity>
