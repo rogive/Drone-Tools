@@ -1,14 +1,11 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, TextInput, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 import * as Facebook from 'expo-facebook'
 
-export const Main = ({ navigation }) => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
+export const Register = ({ navigation }) => {
   async function signInGmail() {
     try {
       const result = await Google.logInAsync({
@@ -58,95 +55,78 @@ export const Main = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
+      <View style={styles.containerHeader}>
+        <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
+      </View>
       <ImageBackground
         source={require("../src/data/pic(1).png")}
         resizeMode="cover"
         style={styles.imageBackground}
       >
-        <View style={{flex: 1, flexDirection: "column-reverse"}}>
-          <View style={styles.containerTextConditions}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={[styles.textConditions]}>Al elegir 'iniciar sesión' Facebook o Google, estas de acuerdo con las Condiciones y Política de Privacidad</Text>
+        <TouchableOpacity style={[styles.containerButtonLogin]}>
+          <Text 
+            onPress={() => navigation.navigate('Lateral')} 
+            style={styles.textLogin}
+          >Iniciar Sesión</Text>
+        </TouchableOpacity>
+        <View style={styles.mainContainerTexto}>
+          <View style={styles.secondaryContainerTexto}>
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <View style={{flex: 1, borderBottomColor: 'rgba(21,42,113,1)', borderBottomWidth: 1}}/>
+              <View style={{flex: 1, borderTopColor: 'rgba(21,42,113,1)', borderTopWidth: 1}}/>
+            </View>
+            <View style={{paddingLeft: 10, paddingRight: 10}}>
+              <Text style={[styles.textO]}>o</Text>
+            </View>
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <View style={{flex: 1, borderBottomColor: 'rgba(21,42,113,1)', borderBottomWidth: 1}}/>
+              <View style={{flex: 1, borderTopColor: 'rgba(21,42,113,1)', borderTopWidth: 1}}/>
             </View>
           </View>
-          <TouchableOpacity style={[styles.containerButtonRegister]}>
-            <Text 
-              onPress={() => navigation.navigate('Registro')} 
-              style={styles.textRegister}
-            >¿Nuevo? Crear una cuenta</Text>
-          </TouchableOpacity>
-          <View style={styles.containersigninplatforms}>
-            <TouchableOpacity style={[styles.containerButtonRegisterFacebook]}>
-              <View style={styles.containerImageSigninFacebook}>
-                <View style={{flex: 3}}>
-                  <Image 
-                    style={styles.imageFacebook}
-                    source={require("../src/data/facebook-icon.png")}
-                  />
-                </View>
-                <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
-                  <Text 
-                    onPress={() => { signInFacebook() }} 
-                    style={styles.textRegisterFacebook}
-                  >Facebook</Text>
-                </View>
+        </View>
+        <View style={styles.containersigninplatforms}>
+          <TouchableOpacity style={[styles.containerButtonRegisterFacebook]}>
+            <View style={styles.containerImageSigninFacebook}>
+              <View style={{flex: 3}}>
+                <Image 
+                  style={styles.imageFacebook}
+                  source={require("../src/data/facebook-icon.png")}
+                />
               </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.containerButtonRegisterGmail]}>
-              <View style={styles.containerImageSigninGmail}>
-                <View style={{flex: 3}}>
-                  <Image 
-                    style={styles.imageGmail}
-                    source={require("../src/data/gmail-icon.png")}
-                  />
-                </View>
-                <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
-                  <Text 
-                    onPress={() => { signInGmail() }} 
-                    style={styles.textRegisterGmail}
-                  >Google</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.mainContainerTexto}>
-            <View style={styles.secondaryContainerTexto}>
-              <View style={{flex: 1, flexDirection: 'column'}}>
-                <View style={{flex: 1, borderBottomColor: 'rgba(21,42,113,1)', borderBottomWidth: 1}}/>
-                <View style={{flex: 1, borderTopColor: 'rgba(21,42,113,1)', borderTopWidth: 1}}/>
-              </View>
-              <View style={{paddingLeft: 10, paddingRight: 10}}>
-                <Text style={[styles.textO]}>o</Text>
-              </View>
-              <View style={{flex: 1, flexDirection: 'column'}}>
-                <View style={{flex: 1, borderBottomColor: 'rgba(21,42,113,1)', borderBottomWidth: 1}}/>
-                <View style={{flex: 1, borderTopColor: 'rgba(21,42,113,1)', borderTopWidth: 1}}/>
+              <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
+                <Text 
+                  onPress={() => { signInFacebook() }} 
+                  style={styles.textRegisterFacebook}
+                >Facebook</Text>
               </View>
             </View>
-          </View>
-          <TouchableOpacity style={[styles.containerButtonLogin]}>
-            <Text 
-              onPress={() => navigation.navigate('Lateral')} 
-              style={styles.textLogin}
-            >Iniciar Sesión</Text>
           </TouchableOpacity>
-          <TextInput
-            placeholder=" Password"
-            onChangeText={text => setPassword(text)}
-            value={password}
-            secureTextEntry
-            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10}}
-          />
-          <TextInput
-            placeholder=" Email"
-            onChangeText={text => setEmail(text)}
-            value={email}
-            secureTextEntry
-            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10}}
-          />
-          <View style={{height: 30, width: 280, marginBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
-            <Text style={{flex: 1, color: "rgba(21,42,113,1)", fontSize: 22, fontWeight: 'bold', fontStyle: 'italic', alignItems: 'center', justifyContent: 'center'}}
-            >Iniciar Sesión</Text>
+          <TouchableOpacity style={[styles.containerButtonRegisterGmail]}>
+            <View style={styles.containerImageSigninGmail}>
+              <View style={{flex: 3}}>
+                <Image 
+                  style={styles.imageGmail}
+                  source={require("../src/data/gmail-icon.png")}
+                />
+              </View>
+              <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
+                <Text 
+                  onPress={() => { signInGmail() }} 
+                  style={styles.textRegisterGmail}
+                >Google</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity style={[styles.containerButtonRegister]}>
+          <Text 
+            onPress={() => navigation.navigate('Registro')} 
+            style={styles.textRegister}
+          >¿Nuevo? Crear una cuenta</Text>
+        </TouchableOpacity>
+        <View style={styles.containerTextConditions}>
+          <View style={{flex: 1, alignItems: 'center'}}>
+            <Text style={[styles.textConditions]}>Al elegir 'iniciar sesión' Facebook o Google, estas de acuerdo con las Condiciones y Política de Privacidad</Text>
           </View>
         </View>
       </ImageBackground>
@@ -174,7 +154,7 @@ const styles = StyleSheet.create({
   mainContainerTexto: {
     height: 5,
     width: 280,
-    marginBottom: 10,
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -204,12 +184,12 @@ const styles = StyleSheet.create({
   imageBackground: {
     flex: 9,
     alignItems: "center",
-    flexDirection: "column-reverse"
+
   },
   containersigninplatforms: {
-    height: 40,
+    height: 46,
     width: 280,
-    marginBottom: 10,
+    marginTop: 15,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
@@ -225,7 +205,7 @@ const styles = StyleSheet.create({
     minWidth: 88,
   },
   containerButtonRegisterFacebook: {
-    height: 40,
+    height: 46,
     width: 125,
     backgroundColor: "rgba(21,42,113,1)",
     justifyContent: "flex-start",
@@ -245,7 +225,7 @@ const styles = StyleSheet.create({
     paddingRight: 2
   },
   containerButtonRegisterGmail: {
-    height: 40,
+    height: 46,
     width: 125,
     backgroundColor: "white",
     justifyContent: "center",
@@ -265,12 +245,12 @@ const styles = StyleSheet.create({
     paddingRight: 2
   },
   containerButtonRegister: {
-    height: 40,
+    height: 46,
     width: 280,
     backgroundColor: "white",
     borderColor: "rgba(21,42,113,1)",
     borderWidth: 1,
-    marginBottom: 10,
+    marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -288,10 +268,10 @@ const styles = StyleSheet.create({
     paddingRight: 16
   },
   containerButtonLogin: {
-    height: 40,
+    height: 46,
     width: 280,
     backgroundColor: "rgba(21,42,113,1)",
-    marginBottom: 10,
+    marginTop: 415,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -309,9 +289,9 @@ const styles = StyleSheet.create({
     paddingRight: 16
   },
   containerTextConditions: {
-    height: 40,
+    height: 46,
     width: 280,
-    marginBottom: 2,
+    marginTop: 5
   },
   textHeader: {
     color: "#fff",
@@ -344,11 +324,8 @@ const styles = StyleSheet.create({
     fontStyle: 'italic'
   },  
   textConditions: {
-    flex: 1,
     color: "#fff",
     fontSize: 12,
-    fontStyle: 'italic',
-    alignItems: 'center',
-    justifyContent: 'center'
+    fontStyle: 'italic'
   }
 }); 

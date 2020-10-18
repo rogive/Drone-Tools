@@ -10,12 +10,6 @@ export const Profile = ({route, navigation}) => {
   const [lastname, setLastName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
 
-  useEffect( () => {
-/*     setSignedIn(route.params.signedIn)
-    setName(route.params.name)
-    setLastName(route.params.lastName)
-    setPhotoUrl(route.params.photoUrl) */
-  }, [])
   const Tab = createMaterialTopTabNavigator()
 
   return (
