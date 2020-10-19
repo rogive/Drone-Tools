@@ -33,7 +33,7 @@ export const Home = ({route, navigation}) => {
           </TouchableOpacity> 
         </View>
         <View  style={{flex: 11,  alignItems: 'center'}}>
-          <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
+          <Text style={styles.textHeader}>DRONE TOOLS</Text>
         </View>
         <View  style={{flex: 2, alignItems: 'center'}}>
           <TouchableOpacity onPress={{}} >
