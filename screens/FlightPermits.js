@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, ScrollView } from 'react-native'
 import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native'
 
-export const Checklists = ({ navigation, route}) => {
+export const FlightPermits = ({ navigation, route}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')
@@ -13,7 +13,7 @@ export const Checklists = ({ navigation, route}) => {
       <View style={{ backgroundColor: '#F5F5F5', height: 750}}>
         <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
           <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
-              <Text style={{color: 'white'}}>+ Crear una nueva lista de chequeo</Text>
+              <Text style={{color: 'white'}}>+ Crear un nuevo permiso de vuelo</Text>
           </CollapseHeader>
           <CollapseBody>
               <Text> Registro </Text>
@@ -21,7 +21,7 @@ export const Checklists = ({ navigation, route}) => {
         </Collapse>
         <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
           <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
-              <Text style={{color: 'white'}}>FOTOGRAFIA Y VIDEO</Text>
+              <Text style={{color: 'white'}}>Chia Inspeccion Torres</Text>
           </CollapseHeader>
           <CollapseBody>
               <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
@@ -29,7 +29,7 @@ export const Checklists = ({ navigation, route}) => {
         </Collapse>
         <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
           <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
-              <Text style={{color: 'white'}}>FOTOGRAMETRÍA</Text>
+              <Text style={{color: 'white'}}>Soacha Supervision Rio</Text>
           </CollapseHeader>
           <CollapseBody>
               <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
@@ -43,11 +43,13 @@ export const Checklists = ({ navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'rgba(21,42,113,1)',
     flexDirection: 'column'
   },
   containerBody: {
     flex: 8,
     backgroundColor: '#F5F5F5',
+    marginTop: 25,
     height: 750
   },
   containerProfile: {

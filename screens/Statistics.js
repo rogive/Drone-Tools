@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from
 import AsyncStorage from '@react-native-community/async-storage'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
-export const Profile = ({route, navigation}) => {
+export const Statistics = ({route, navigation}) => {
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')
@@ -18,10 +18,10 @@ export const Profile = ({route, navigation}) => {
         <Text style={styles.textHeader}>DRONE TOOLS</Text>
       </View>
       <View style={styles.containerBody}>
-        <TouchableOpacity style={[styles.containerProfile]}>
+        <TouchableOpacity style={[styles.containerStatistics]}>
           <Text 
             onPress={() => navigation.openDrawer()} 
-            style={styles.textProfile}
+            style={styles.textStatistics}
           >Screen en construcción</Text>
         </TouchableOpacity>
       </View>

@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 import * as Facebook from 'expo-facebook'
 
-export const Register = ({ navigation }) => {
+export const Registry = ({ navigation }) => {
   async function signInGmail() {
     try {
       const result = await Google.logInAsync({
@@ -56,7 +56,7 @@ export const Register = ({ navigation }) => {
     <View style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.containerHeader}>
-        <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
+        <Text style={styles.textHeader}>DRONE TOOLS</Text>
       </View>
       <ImageBackground
         source={require("../src/data/pic(1).png")}

@@ -7,23 +7,19 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import {Projects} from './Projects'
 import {Checklists} from './Checklists'
 import {Flightlogs} from './Flightlogs'
+import {FlightPermits} from './FlightPermits'
 
 export const Home = ({route, navigation}) => {
+  const [projects, setProjects] = useState([])
   const [signedIn, setSignedIn] = useState(false)
   const [name, setName] = useState('')
   const [lastname, setLastName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
 
-  //useEffect( () => {
-/*     setSignedIn(route.params.signedIn)
-    setName(route.params.name)
-    setLastName(route.params.lastName)
-    setPhotoUrl(route.params.photoUrl) */
- // }, [])
+
   const Tab = createMaterialTopTabNavigator()
 
   return (
-
     <View style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.containerHeader}>
@@ -45,20 +41,23 @@ export const Home = ({route, navigation}) => {
         initialRouteName="Feed"
         tabBarOptions={{
           activeTintColor: '#e91e63',
-          labelStyle: { fontSize: 12, color: 'white' },
+          labelStyle: { fontSize: 11, color: 'white' },
+          tabStyle: { width: 120 },
           style: { backgroundColor: 'rgba(21,42,113,1)'},
-          indicatorStyle :{ backgroundColor:'white' }
+          indicatorStyle :{ backgroundColor:'white' },
+          scrollEnabled: true
         }}
       >
         <Tab.Screen
-          name="Projects"
+          name="Proyectos"
           component={Projects}
           tabBarOptions={{
             indicatorStyle: { backgroundColor:'white'}
           }}
         />
-        <Tab.Screen name="Checklists" component={Checklists} />
-        <Tab.Screen name="Flightlogs" component={Flightlogs} />
+        <Tab.Screen name="Bitacoras" component={Flightlogs} />
+        <Tab.Screen name="Permisos" component={FlightPermits} />
+        <Tab.Screen name="Listas de Chequeo" component={Checklists} />
       </Tab.Navigator>
     </View>
   )

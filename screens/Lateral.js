@@ -4,6 +4,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { DrawerItemList} from '@react-navigation/drawer'
 import {Home} from './Home'
 import {Profile} from './Profile'
+import {Documents} from './Documents'
+import {Statistics} from './Statistics'
+import {Help} from './Help'
 
 export const Lateral = ({route}) => {
   const [signedIn, setSignedIn] = useState(false)
@@ -50,8 +53,11 @@ export const Lateral = ({route}) => {
 
   return (
     <Drawer.Navigator drawerContent={props => <CustomDrawer {...props} />}>
-      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Inicio" component={Home} />
       <Drawer.Screen name="Perfil" component={Profile} />
+      <Drawer.Screen name="Documentos" component={Documents} />
+      <Drawer.Screen name="Estadistica" component={Statistics} />
+      <Drawer.Screen name="Ayuda" component={Help} />
     </Drawer.Navigator>
   )
 }

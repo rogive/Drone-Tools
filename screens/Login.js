@@ -15,7 +15,7 @@ export const Registro = ({ route }) => {
     <View style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.containerHeader}>
-        <Text style={styles.textHeader}>DRONE MANAGEMENT</Text>
+        <Text style={styles.textHeader}>DRONE TOOLS</Text>
       </View>
       <ImageBackground
         source={require("../src/data/pic(4).jpg")}
