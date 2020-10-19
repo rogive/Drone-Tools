@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, ImageBackground, Image } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native'
 
 export const Flightlogs = ({ navigation, route}) => {
   const [signedIn, setSignedIn] = useState(false)
@@ -11,16 +9,26 @@ export const Flightlogs = ({ navigation, route}) => {
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.containerBody}>
-        <TouchableOpacity style={[styles.containerProfile]}>
-          <Text 
-            onPress={() => console.log("Boton presionado")} 
-            style={styles.textProfile}
-          >Ivan</Text>
-        </TouchableOpacity>
+        <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
+          <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
+              <Text style={{color: 'white'}}>FOTOGRAFIA Y VIDEO</Text>
+          </CollapseHeader>
+          <CollapseBody>
+              <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
+          </CollapseBody>
+        </Collapse>
+        <Collapse style={{borderBottomWidth:1,borderTopWidth:1}}>
+          <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
+              <Text style={{color: 'white'}}>FOTOGRAMETRÍA</Text>
+          </CollapseHeader>
+          <CollapseBody>
+              <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
+          </CollapseBody>
+        </Collapse>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
