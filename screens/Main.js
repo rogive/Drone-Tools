@@ -69,14 +69,18 @@ export const Main = ({ navigation }) => {
               <Text style={[styles.textConditions]}>Al elegir 'iniciar sesión' Facebook o Google, estas de acuerdo con las Condiciones y Política de Privacidad</Text>
             </View>
           </View>
-          <TouchableOpacity style={[styles.containerButtonRegister]}>
-            <Text 
-              onPress={() => navigation.navigate('Registro')} 
-              style={styles.textRegister}
+          <TouchableOpacity 
+            style={[styles.containerButtonRegister]}
+            onPress={() => navigation.navigate('Registro')} 
+          >
+            <Text style={styles.textRegister}
             >¿Nuevo? Crear una cuenta</Text>
           </TouchableOpacity>
           <View style={styles.containersigninplatforms}>
-            <TouchableOpacity style={[styles.containerButtonRegisterFacebook]}>
+            <TouchableOpacity
+              style={styles.containerButtonRegisterFacebook}
+              onPress={() => { signInFacebook() }}
+            >
               <View style={styles.containerImageSigninFacebook}>
                 <View style={{flex: 3}}>
                   <Image 
@@ -85,14 +89,15 @@ export const Main = ({ navigation }) => {
                   />
                 </View>
                 <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
-                  <Text 
-                    onPress={() => { signInFacebook() }} 
-                    style={styles.textRegisterFacebook}
+                  <Text style={styles.textRegisterFacebook}
                   >Facebook</Text>
                 </View>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.containerButtonRegisterGmail]}>
+            <TouchableOpacity 
+              style={[styles.containerButtonRegisterGmail]} 
+              onPress={() => { signInGmail() }} 
+            >
               <View style={styles.containerImageSigninGmail}>
                 <View style={{flex: 3}}>
                   <Image 
@@ -102,7 +107,6 @@ export const Main = ({ navigation }) => {
                 </View>
                 <View style={{flex: 6, alignItems:'center', justifyContent: 'center'}}>
                   <Text 
-                    onPress={() => { signInGmail() }} 
                     style={styles.textRegisterGmail}
                   >Google</Text>
                 </View>
@@ -124,10 +128,11 @@ export const Main = ({ navigation }) => {
               </View>
             </View>
           </View>
-          <TouchableOpacity style={[styles.containerButtonLogin]}>
-            <Text 
-              onPress={() => navigation.navigate('Lateral')} 
-              style={styles.textLogin}
+          <TouchableOpacity 
+            style={[styles.containerButtonLogin]} 
+            onPress={() => navigation.navigate('Lateral')}
+          >
+            <Text style={styles.textLogin}
             >Iniciar Sesión</Text>
           </TouchableOpacity>
           <TextInput
