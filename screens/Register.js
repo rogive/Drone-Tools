@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 import * as Facebook from 'expo-facebook'
 
-export const Registry = ({ navigation }) => {
+export const Register = ({ navigation }) => {
   async function signInGmail() {
     try {
       const result = await Google.logInAsync({

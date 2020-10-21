@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import {Main} from './screens/Main'
-import {Registry} from './screens/Registry'
+import {Register} from './screens/Register'
 import {Lateral} from './screens/Lateral'
 
 const Stack = createStackNavigator()
@@ -17,8 +17,8 @@ export default function App() {
         options={ { headerShown: false } }
       />
       <Stack.Screen
-        name='Registry'
-        component={Registry}
+        name='Register'
+        component={Register}
         options={ { headerShown: false } }
       />
       <Stack.Screen

@@ -63,7 +63,7 @@ export const Main = ({ navigation }) => {
         resizeMode="cover"
         style={styles.imageBackground}
       >
-        <View style={{flex: 1, flexDirection: "column-reverse"}}>
+        <View style={{flex: 1, flexDirection: "column-reverse", alignItems: 'center'}}>
           <View style={styles.containerTextConditions}>
             <View style={{flex: 1, alignItems: 'center'}}>
               <Text style={[styles.textConditions]}>Al elegir 'iniciar sesión' Facebook o Google, estas de acuerdo con las Condiciones y Política de Privacidad</Text>
@@ -71,7 +71,7 @@ export const Main = ({ navigation }) => {
           </View>
           <TouchableOpacity 
             style={[styles.containerButtonRegister]}
-            onPress={() => navigation.navigate('Registro')} 
+            onPress={() => navigation.navigate('Register')} 
           >
             <Text style={styles.textRegister}
             >¿Nuevo? Crear una cuenta</Text>
@@ -153,6 +153,10 @@ export const Main = ({ navigation }) => {
             <Text style={{flex: 1, color: "rgba(21,42,113,1)", fontSize: 22, fontWeight: 'bold', fontStyle: 'italic', alignItems: 'center', justifyContent: 'center'}}
             >Iniciar Sesión</Text>
           </View>
+          <View style={styles.containerTitle}>
+            <Text style={styles.textTitle}
+            >DRONE TOOLS</Text>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -164,6 +168,33 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(21,42,113,1)',
     flexDirection: 'column'
+  },
+  containerTitle: {
+    height: 70,
+    width: 220,
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    borderRadius: 20,
+    marginBottom: 220,
+    backgroundColor: 'white',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+  },
+  textTitle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: "rgba(21,42,113,1)",
+    fontSize: 22,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    fontFamily: 'Verdana'
   },
   containerHeader: {
     flex: 1,
