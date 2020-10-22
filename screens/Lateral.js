@@ -14,10 +14,6 @@ export const Lateral = ({route}) => {
   const [lastname, setLastName] = useState('Perez')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
 
-/*   useEffect( () => {
-
-  }, []) */
-
   const CustomDrawer = (props) => (
     <View>
       <View

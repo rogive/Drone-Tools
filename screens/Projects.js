@@ -15,12 +15,11 @@ export const Projects = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `${process.env.BACKEND_LINK}/pilot/project/list`,
-    })
-      .then(({ data }) => {
+      baseURL: `${process.env.SERVIDORB}`,
+      url: `/pilot/project/list`,
+    }).then(({ data }) => {
         setProjects(data)
-      })
-      .catch((error) => console.log(error))
+    }).catch((error) => console.log(error))
   }, [])
 
   function handleSubmitProject() {
@@ -29,7 +28,8 @@ export const Projects = () => {
     }
     axios({
       method: 'POST',
-      url: `${process.env.BACKEND_LINK}/pilot/project/create`,
+      baseURL: `${process.env.SERVIDORB}`,
+      url: `/pilot/project/create`,
       data: data
     }).then(({ data }) => {
       setProjects( projects.concat(data) )
@@ -46,7 +46,8 @@ export const Projects = () => {
   function handleDeleteProject(idProject) {
     axios({
       method: 'DELETE',
-      url: `${process.env.BACKEND_LINK}/pilot/project/deleteandlist/${idProject}`
+      baseURL: `${process.env.SERVIDORB}`,
+      url: `/pilot/project/deleteandlist/${idProject}`
     }).then(({ data }) => {
       setProjects( data )
     }).catch((error) => {

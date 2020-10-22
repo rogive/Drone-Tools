@@ -4,6 +4,7 @@ import { StyleSheet, TextInput, TouchableOpacity, View, Text, ImageBackground, I
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Google from 'expo-google-app-auth'
 import * as Facebook from 'expo-facebook'
+import axios from 'axios'
 
 export const Main = ({ navigation }) => {
   const [email, setEmail] = useState("")
@@ -55,11 +56,36 @@ export const Main = ({ navigation }) => {
       console.log("error: ", e)
     }
   }
+  function handleLogin() {
+    const data = {
+      email,
+      password
+    }
+    console.log(process.env.SERVIDORB)
+    axios({
+      method: 'POST',
+      baseURL: `${process.env.SERVIDORB}`,
+      url: `/pilot/login`,
+      data: data
+    }).then(({ data }) => {
+      console.log('Login Exitoso!')
+      console.log(data)
+      navigation.navigate('Lateral', {
+        token: data.token,
+        name: data.pilot.name,
+        lastName: data.pilot.last_name,
+        email: data.pilot.email
+      })
+    }).catch((error) => {
+      console.log(error)
+      navigation.navigate('Main')
+    })
+  }
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
       <ImageBackground
-        source={require("../src/data/pic(1).png")}
+        source={require("../src/data/pic(3).png")}
         resizeMode="cover"
         style={styles.imageBackground}
       >
@@ -130,33 +156,32 @@ export const Main = ({ navigation }) => {
           </View>
           <TouchableOpacity 
             style={[styles.containerButtonLogin]} 
-            onPress={() => navigation.navigate('Lateral')}
+            onPress={() => { handleLogin() }}
           >
             <Text style={styles.textLogin}
             >Iniciar Sesión</Text>
           </TouchableOpacity>
           <TextInput
-            placeholder=" Password"
+            placeholder="Password"
             onChangeText={text => setPassword(text)}
             value={password}
             secureTextEntry
-            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10}}
+            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10, paddingLeft: 10}}
           />
           <TextInput
-            placeholder=" Email"
+            placeholder="Email"
             onChangeText={text => setEmail(text)}
             value={email}
-            secureTextEntry
-            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10}}
+            style={{backgroundColor: 'white', height: 40, width: 280, marginBottom: 10, paddingLeft: 10}}
           />
           <View style={{height: 30, width: 280, marginBottom: 20, alignItems: 'center', justifyContent: 'center'}}>
             <Text style={{flex: 1, color: "rgba(21,42,113,1)", fontSize: 22, fontWeight: 'bold', fontStyle: 'italic', alignItems: 'center', justifyContent: 'center'}}
             >Iniciar Sesión</Text>
           </View>
-          <View style={styles.containerTitle}>
+{/*           <View style={styles.containerTitle}>
             <Text style={styles.textTitle}
             >DRONE TOOLS</Text>
-          </View>
+          </View> */}
         </View>
       </ImageBackground>
     </View>
