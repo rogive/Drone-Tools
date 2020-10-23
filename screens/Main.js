@@ -15,14 +15,27 @@ export const Main = ({ navigation }) => {
       const result = await Google.logInAsync({
         androidClientId: process.env.ANDROID_GMAIL_CLIENT_ID,
         scopes: ['profile', 'email'],
-      });
+      })
       if (result.type === 'success') {
-        navigation.navigate('Lateral', {
-          signedIn: true,
+        const data = {
           name: result.user.givenName,
-          lastName: result.user.familyName,
-          photoUrl: result.user.photoUrl,
-          email: result.user.email
+          lastname: result.user.familyName,
+          profileUrl: result.user.photoUrl,
+          email: result.user.email,
+          password: process.env.PDEFAULT
+        }
+        axios({
+          method: 'POST',
+          baseURL: `${process.env.SERVIDORB}`,
+          url: `/pilot/registerandlogin`,
+          data: data
+        }).then(({ data }) => {
+          console.log(data)
+          handletoken(data)
+          navigation.navigate('Lateral')
+        }).catch((error) => {
+          console.log(error)
+          navigation.navigate('Main')
         })
       } else {
         navigation.navigate('Main')
@@ -42,12 +55,25 @@ export const Main = ({ navigation }) => {
       if (type === 'success') {
         const response = await fetch(`https://graph.facebook.com/me?fields=first_name,last_name,email,picture&access_token=${token}`);
         const user = (await response.json())
-        navigation.navigate('Lateral', {
-          signedIn: true,
+        const data = {
           name: user.first_name,
-          lastName: user.last_name,
-          photoUrl: user.picture.data.url,
-          email: user.email
+          lastname: user.last_name,
+          profileUrl: user.picture.data.url,
+          email: user.email,
+          password: process.env.PDEFAULT
+        }
+        axios({
+          method: 'POST',
+          baseURL: `${process.env.SERVIDORB}`,
+          url: `/pilot/registerandlogin`,
+          data: data
+        }).then(({ data }) => {
+          console.log(data)
+          handletoken(data)
+          navigation.navigate('Lateral')
+        }).catch((error) => {
+          console.log(error)
+          navigation.navigate('Main')
         })
       } else {
         navigation.navigate('Main')
