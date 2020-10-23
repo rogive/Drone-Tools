@@ -62,6 +62,7 @@ export const Flightlogs = ({ navigation, route}) => {
                 selectedValue={selectedValue}
                 style={{ height: 40, width: 280, color: '#A5A5A5'}}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                itemStyle={{ fontSize: 10 }}
               >
                 <Picker.Item label="Seleccione un proyecto" value="" />
                 <Picker.Item label="Proyecto 1" value="java" />
@@ -100,26 +101,6 @@ export const Flightlogs = ({ navigation, route}) => {
                 <Text style={styles.textProfile}>Crear</Text>
               </TouchableOpacity>
             </View>
-          </CollapseBody>
-        </Collapse>
-        <Collapse
-          style={{borderBottomWidth:1,borderTopWidth:1}}
-        >
-          <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
-              <Text style={{color: 'white'}}>AEROTECH</Text>
-          </CollapseHeader>
-          <CollapseBody>
-              <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
-          </CollapseBody>
-        </Collapse>
-        <Collapse 
-          style={{borderBottomWidth:1,borderTopWidth:1}}
-        >
-          <CollapseHeader style={{width: '100%',flexDirection:'row',alignItems:'center',padding:10,backgroundColor:'#004C99'}}>
-              <Text style={{color: 'white'}}>CLUB DE PROFESIONALES DE DRONES</Text>
-          </CollapseHeader>
-          <CollapseBody>
-              <Text>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
           </CollapseBody>
         </Collapse>
       </View>
