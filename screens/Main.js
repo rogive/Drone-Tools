@@ -56,26 +56,25 @@ export const Main = ({ navigation }) => {
       console.log("error: ", e)
     }
   }
-  function handleLogin() {
+
+  async function handletoken(data) {
+    await AsyncStorage.setItem('token', data.token)
+    await AsyncStorage.setItem('pilotId', `${data.pilot.id}`)
+  }
+
+  async function handleLogin() {
     const data = {
       email,
       password
     }
-    console.log(process.env.SERVIDORB)
     axios({
       method: 'POST',
       baseURL: `${process.env.SERVIDORB}`,
       url: `/pilot/login`,
       data: data
     }).then(({ data }) => {
-      console.log('Login Exitoso!')
-      console.log(data)
-      navigation.navigate('Lateral', {
-        token: data.token,
-        name: data.pilot.name,
-        lastName: data.pilot.last_name,
-        email: data.pilot.email
-      })
+      handletoken(data)
+      navigation.navigate('Lateral')
     }).catch((error) => {
       console.log(error)
       navigation.navigate('Main')

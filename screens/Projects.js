@@ -10,21 +10,35 @@ export const Projects = () => {
   const [projects, setProjects] = useState([])
   const [name, setName] = useState('')
   const [toogleAdd, setToogleAdd] = useState(false)
+  const [pilotId, setPilotId] = useState('')
   const [error, setError] = useState(null)
+  handletoken()
+  async function handletoken() {
+    try {
+      const token = await AsyncStorage.getItem('token')
+      const PilotId = await AsyncStorage.getItem('pilotId')
+      setPilotId(PilotId)
+    } catch(e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
-    axios({
-      method: 'GET',
-      baseURL: `${process.env.SERVIDORB}`,
-      url: `/pilot/project/list`,
-    }).then(({ data }) => {
+    if(pilotId){
+      axios({
+        method: 'GET',
+        baseURL: `${process.env.SERVIDORB}`,
+        url: `/pilot/project/listbypilot/${pilotId}`,
+      }).then(({ data }) => {
         setProjects(data)
-    }).catch((error) => console.log(error))
-  }, [])
+      }).catch((error) => console.log(error))
+    }
+  }, [pilotId])
 
   function handleSubmitProject() {
     const data = {
-      name
+      name,
+      PilotId: pilotId
     }
     axios({
       method: 'POST',
