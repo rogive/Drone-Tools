@@ -9,6 +9,7 @@ import axios from 'axios'
 export const Projects = () => {
   const [projects, setProjects] = useState([])
   const [name, setName] = useState('')
+  const [company, setCompany] = useState('')
   const [toogleAdd, setToogleAdd] = useState(false)
   const [pilotId, setPilotId] = useState('')
   const [error, setError] = useState(null)
@@ -22,12 +23,11 @@ export const Projects = () => {
       console.log(e)
     }
   }
-
   useEffect(() => {
     if(pilotId){
       axios({
         method: 'GET',
-        baseURL: `${process.env.SERVIDORB}`,
+        baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
         url: `/pilot/project/listbypilot/${pilotId}`,
       }).then(({ data }) => {
         setProjects(data)
@@ -38,11 +38,12 @@ export const Projects = () => {
   function handleSubmitProject() {
     const data = {
       name,
-      PilotId: pilotId
+      PilotId: pilotId,
+      company
     }
     axios({
       method: 'POST',
-      baseURL: `${process.env.SERVIDORB}`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/project/create`,
       data: data
     }).then(({ data }) => {
@@ -60,7 +61,7 @@ export const Projects = () => {
   function handleDeleteProject(idProject) {
     axios({
       method: 'DELETE',
-      baseURL: `${process.env.SERVIDORB}`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/project/deleteandlist/${idProject}`
     }).then(({ data }) => {
       setProjects( data )
@@ -103,7 +104,13 @@ export const Projects = () => {
               placeholder="Nombre del proyecto"
               onChangeText={text => setName(text)}
               value={name}
-              style={styles.textNewProject}
+              style={styles.textNewInput}
+            />
+            <TextInput
+              placeholder="Empresa/Cliente"
+              onChangeText={text => setCompany(text)}
+              value={company}
+              style={styles.textNewInput}
             />
             <View>
               <TouchableOpacity
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16
   },
-  textNewProject: {
+  textNewInput: {
     height: 40,
     width: 280,
     backgroundColor: "white",

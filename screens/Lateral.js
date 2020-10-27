@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, ImageBackground, Image } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { DrawerItemList} from '@react-navigation/drawer'
 import {Home} from './Home'
@@ -7,12 +8,36 @@ import {Profile} from './Profile'
 import {Documents} from './Documents'
 import {Statistics} from './Statistics'
 import {Help} from './Help'
+import axios from 'axios'
 
 export const Lateral = ({route}) => {
-  const [signedIn, setSignedIn] = useState(false)
-  const [name, setName] = useState('Juan')
-  const [lastname, setLastName] = useState('Perez')
+  const [name, setName] = useState('')
+  const [lastname, setLastName] = useState('')
   const [photoUrl, setPhotoUrl] = useState('https://st2.depositphotos.com/3265223/11545/v/950/depositphotos_115458896-stock-illustration-drone-icon-aerial-photography-drone.jpg')
+  const [pilotId, setPilotId] = useState('')
+  handletoken()
+  async function handletoken() {
+    try {
+      const token = await AsyncStorage.getItem('token')
+      const PilotId = await AsyncStorage.getItem('pilotId')
+      setPilotId(PilotId)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+  useEffect(() => {
+    if(pilotId){
+      axios({
+        method: 'GET',
+        baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
+        url: `/pilot/list/${pilotId}`,
+      }).then(({ data }) => {
+        setName(data.pilot.name)
+        setLastName(data.pilot.lastname)
+        setPhotoUrl(data.pilot.profileUrl)
+      }).catch((error) => console.log(error))
+    }
+  }, [pilotId])
 
   const CustomDrawer = (props) => (
     <View>

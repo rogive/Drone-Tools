@@ -26,11 +26,10 @@ export const Main = ({ navigation }) => {
         }
         axios({
           method: 'POST',
-          baseURL: `${process.env.SERVIDORB}`,
+          baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
           url: `/pilot/registerandlogin`,
           data: data
         }).then(({ data }) => {
-          console.log(data)
           handletoken(data)
           navigation.navigate('Lateral')
         }).catch((error) => {
@@ -64,11 +63,10 @@ export const Main = ({ navigation }) => {
         }
         axios({
           method: 'POST',
-          baseURL: `${process.env.SERVIDORB}`,
+          baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
           url: `/pilot/registerandlogin`,
           data: data
         }).then(({ data }) => {
-          console.log(data)
           handletoken(data)
           navigation.navigate('Lateral')
         }).catch((error) => {
@@ -95,7 +93,7 @@ export const Main = ({ navigation }) => {
     }
     axios({
       method: 'POST',
-      baseURL: `${process.env.SERVIDORB}`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/login`,
       data: data
     }).then(({ data }) => {

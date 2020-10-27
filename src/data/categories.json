@@ -1,0 +1,56 @@
+[
+  {
+    "id": "capacitación",
+    "_id": "5f4abecc62bb2d15f83716b4",
+    "label": "Capacitación",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20(21).jpg?alt=media&token=1e3086f1-bcd4-4cb7-b03a-eca0dd77b06a"
+  },
+  {
+    "id": "fotografía y video",
+    "_id": "5f4abecf62bb2d15f83716b6",
+    "label": "Fotografía y Video",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(13).jpg?alt=media&token=df151379-58dd-45b7-b42c-aa853f760ff3"
+  },
+  {
+    "id": "seguimiento de obra",
+    "_id": "5f4ac05662bb2d15f83716b8",
+    "label": "Seguimiento de Obra",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(1).png?alt=media&token=99e8d60d-9dc3-46f1-ab81-20f1a7bd1f66"
+  },
+  {
+    "id": "fotogrametría",
+    "_id": "5f4ac0f462bb2d15f83716c6",
+    "label": "Fotogrametría",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(15).jpg?alt=media&token=605aa026-48fa-4870-8de8-19fac6d11207"
+  },
+  {
+    "id": "termografía",
+    "_id": "5f4ac05b62bb2d15f83716bc",
+    "label": "Termografía",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20(22).jpg?alt=media&token=63035188-5e4e-46b1-8353-868e60b098f1"
+  },
+  {
+    "id": "inspecciones industriales",
+    "_id": "5f4ac07862bb2d15f83716be",
+    "label": "Inspecciones Industriales",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20(23).jpg?alt=media&token=4d3f45c5-74c8-4ffa-bd75-828e85249a5b"
+  },
+  {
+    "id": "búsqueda y rescate",
+    "_id": "5f4ac08062bb2d15f83716c0",
+    "label": "Búsqueda y Rescate",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(6).jpg?alt=media&token=53c6bbed-be7b-40b8-9f9c-618a876afba8"
+  },
+  {
+    "id": "seguridad",
+    "_id": "5f4ac08762bb2d15f83716c2",
+    "label": "Seguridad",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(19).jpg?alt=media&token=b28939f5-cc17-4992-bac0-871fdf51633b"
+  },
+  {
+    "id": "agricultura de precisión",
+    "_id": "5f4ac08c62bb2d15f83716c4",
+    "label": "Agricultura de Precisión",
+    "url": "https://firebasestorage.googleapis.com/v0/b/droneservice-cc42f.appspot.com/o/src%2FImages%2FTest%20%20(5).jpg?alt=media&token=99b92064-6396-4fe4-9873-8659ba9408a8"
+  }
+]

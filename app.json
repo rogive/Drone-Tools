@@ -24,6 +24,9 @@
     },
     "android": {
       "package": "com.rogive.dronemanagement"
+    },
+    "extra": {
+      "servidorb" : "http://192.168.20.35:8000"
     }
   }
 }

@@ -4,11 +4,9 @@ import { StyleSheet, TouchableOpacity, View, Text, ImageBackground } from 'react
 import AsyncStorage from '@react-native-community/async-storage'
 
 export const Registro = ({ route }) => {
-  console.log(route)
 
   async function handleToken() {
     const token = await AsyncStorage.getItem('token')
-    console.log(token)
   }
 
   return (

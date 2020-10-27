@@ -1,50 +1,111 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, TextInput, Picker, ScrollView } from 'react-native'
 import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native'
+import AsyncStorage from '@react-native-community/async-storage'
+import Categories from '../src/data/categories.json'
+import Drones from '../src/data/drones.json'
 import axios from 'axios'
 
 export const Flightlogs = ({ navigation, route}) => {
   const [flightlogs, setFlightlogs] = useState([])
   const [projects, setProjects] = useState([])
-  const [nameRegistry, setName] = useState('')
-  const [nameClient, setNameClient] = useState('')
-  const [timeFlightlog, setTimeFlightlog] = useState('')
-  const [takeoff, setTakeoff] = useState('')
+  const [nameRegistry, setRegistry] = useState('')
+  const [timeFlightLog, setTimeFlightlog] = useState('')
+  const [takeoff, setTakeOff] = useState('')
   const [toogleAdd, setToogleAdd] = useState(false)
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedProject, setSelectedProject] = useState("")
+  const [selectedCategorie, setSelectedCategorie] = useState("")
+  const [selectedBrand, setSelectedBrand] = useState("DJI")
+  const [currModels, setCurrModels] = useState(Drones.filter(e => e.id === 0)[0].models)
+  const [selectedModel, setSelectedModel] = useState("Phantom 1")
+  const [pilotId, setPilotId] = useState('')
   const [error, setError] = useState(null)
+  handletoken()
+  async function handletoken() {
+    try {
+      const token = await AsyncStorage.getItem('token')
+      const PilotId = await AsyncStorage.getItem('pilotId')
+      setPilotId(PilotId)
+    } catch(e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
     axios({
       method: 'GET',
-      baseURL: `${process.env.SERVIDORB}`,
-      url: `/pilot/project/list`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
+      url: `/pilot/project/listbypilot/${pilotId}`,
     }).then(({ data }) => {
       setProjects(data)
     }).catch((error) => console.log(error))
-  }, [])
+  }, [pilotId])
 
   function handleSubmitFlightlog() {
     const data = {
-      name
+      name: nameRegistry
     }
+    const data2 = {
+      name: nameRegistry,
+      project: selectedProject,
+      categorie: selectedCategorie,
+      brand: selectedBrand,
+      model: selectedModel,
+      flighttime: timeFlightLog,
+      takeoff
+    }
+    console.log(data2)
     axios({
       method: 'POST',
-      baseURL: `${process.env.SERVIDORB}`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/flightlog/create`,
-      data: data
+      data: data2
     }).then(({ data }) => {
       setFlightlogs( flightlogs.concat(data) )
       setToogleAdd(!toogleAdd)
-      setName('')
     }).catch((error) => {
       setError(error)
       setToogleAdd(!toogleAdd)
-      setName('')
       console.log(error)
     })
   }
 
+  const mapProjects = (items) => {
+    return items.map( project => {
+      return(
+        <Picker.Item label={project.name} value={project.name} key={project.id}/>
+      )
+    })
+  }
+
+  const mapCategories = (categories) => {
+    return categories.map( categorie => {
+      return(
+        <Picker.Item label={categorie.id} value={categorie.id} key={categorie._id}/>
+      )
+    })
+  }
+
+  const mapDrones = (drones) => {
+    return drones.map( drone => {
+      return(
+        <Picker.Item label={drone.brand} value={drone.brand} key={drone.id}/>
+      )
+    })
+  }
+
+  const mapModels = (models) => {
+    return models.map( model => {
+      return(
+        <Picker.Item label={model.name} value={model.name} key={model.name}/>
+      )
+    })
+  }
+  function handleChangeBrand(itemBrand) {
+    console.log(itemBrand)
+    setSelectedBrand(itemBrand)
+    setCurrModels(Drones.filter(e => e.brand === itemBrand)[0].models)
+  }
   return (
     <ScrollView style={{flexDirection: 'column'}}>
       <View style={{ backgroundColor: '#F5F5F5', height: 750}}>
@@ -57,41 +118,65 @@ export const Flightlogs = ({ navigation, route}) => {
             <Text style={{color: 'white'}}>+ Crear un nuevo proyecto</Text>
           </CollapseHeader>
           <CollapseBody style={{alignItems: "center"}}>
+            <TextInput
+              placeholder="Nombre del registro"
+              onChangeText={text => setRegistry(text)}
+              value={nameRegistry}
+              style={styles.inputText}
+            />
             <View style={styles.pickerNewFlightlog}>
               <Picker
-                selectedValue={selectedValue}
+                selectedValue={selectedProject}
                 style={{ height: 40, width: 280, color: '#A5A5A5'}}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                onValueChange={(itemValue, itemIndex) => setSelectedProject(itemValue)}
                 itemStyle={{ fontSize: 10 }}
               >
                 <Picker.Item label="Seleccione un proyecto" value="" />
-                <Picker.Item label="Proyecto 1" value="java" />
-                <Picker.Item label="Proyecto 2" value="js" />
+                {mapProjects(projects)}
+              </Picker>
+            </View>
+            <View style={styles.pickerNewFlightlog}>
+              <Picker
+                selectedValue={selectedCategorie}
+                style={{ height: 40, width: 280, color: '#A5A5A5'}}
+                onValueChange={(itemCategorie, index) => setSelectedCategorie(itemCategorie)}
+                itemStyle={{ fontSize: 10 }}
+              >
+                <Picker.Item label="Tipo de Operación" value="" />
+                {mapCategories(Categories)}
+              </Picker>
+            </View>
+            <View style={styles.pickerNewFlightlog}>
+              <Picker
+                selectedValue={selectedBrand}
+                style={{ height: 40, width: 280, color: '#A5A5A5'}}
+                onValueChange={(itemBrand, index) => { handleChangeBrand(itemBrand)}}
+                itemStyle={{ fontSize: 10 }}
+              >
+                {mapDrones(Drones)}
+              </Picker>
+            </View>
+            <View style={styles.pickerNewFlightlog}>
+              <Picker
+                selectedValue={selectedModel}
+                style={{ height: 40, width: 280, color: '#A5A5A5'}}
+                onValueChange={(itemModel, index) => setSelectedModel(itemModel) }
+                itemStyle={{ fontSize: 10 }}
+              >
+                {mapModels(currModels)}
               </Picker>
             </View>
             <TextInput
-              placeholder="Nombre del registro"
-              onChangeText={text => setName(text)}
-              value={nameRegistry}
-              style={styles.inputNewFlightlog}
-            />
-            <TextInput
-              placeholder="Empresa o Cliente"
-              onChangeText={text => setName(text)}
-              value={nameClient}
-              style={styles.inputNewFlightlog}
-            />
-            <TextInput
               placeholder="Horas de vuelo"
-              onChangeText={text => setName(text)}
-              value={timeFlightlog}
-              style={styles.inputNewFlightlog}
+              onChangeText={text => setTimeFlightlog(text)}
+              value={timeFlightLog}
+              style={styles.inputText}
             />
             <TextInput
               placeholder="Despegues / Aterrizajes"
-              onChangeText={text => setName(text)}
+              onChangeText={text => setTakeOff(text)}
               value={takeoff}
-              style={styles.inputNewFlightlog}
+              style={styles.inputText}
             />
             <View>
               <TouchableOpacity
@@ -166,7 +251,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16
   },
-  inputNewFlightlog: {
+  inputText: {
     height: 40,
     width: 280,
     backgroundColor: "white",
@@ -186,7 +271,8 @@ const styles = StyleSheet.create({
     minWidth: 88,
     paddingLeft: 16,
     paddingRight: 16,
-    fontSize: 16
+    fontSize: 16,
+    color: '#A5A5A5'
   },
   pickerNewFlightlog: {
     height: 40,

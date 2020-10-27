@@ -65,10 +65,9 @@ export const Register = ({ navigation }) => {
       email,
       password
     }
-    console.log(data)
     axios({
       method: 'POST',
-      baseURL: `${process.env.SERVIDORB}`,
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/register`,
       data: data
     }).then(() => {
