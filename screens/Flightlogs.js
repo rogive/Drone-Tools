@@ -3,13 +3,14 @@ import { StyleSheet, TouchableOpacity, View, Text, TextInput, Picker, ScrollView
 import {Collapse,CollapseHeader, CollapseBody} from 'accordion-collapse-react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import Categories from '../src/data/categories.json'
+import Icon from 'react-native-vector-icons/Entypo'
 import Drones from '../src/data/drones.json'
 import axios from 'axios'
 
 export const Flightlogs = ({ navigation, route}) => {
-  const [flightlogs, setFlightlogs] = useState([])
+  const [flightlogs, ss] = useState([])
   const [projects, setProjects] = useState([])
-  const [nameRegistry, setRegistry] = useState('')
+  const [nameRegistry, setNameRegistry] = useState('')
   const [timeFlightLog, setTimeFlightlog] = useState('')
   const [takeoff, setTakeOff] = useState('')
   const [toogleAdd, setToogleAdd] = useState(false)
@@ -39,27 +40,32 @@ export const Flightlogs = ({ navigation, route}) => {
     }).then(({ data }) => {
       setProjects(data)
     }).catch((error) => console.log(error))
+    axios({
+      method: 'GET',
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
+      url: `/pilot/flightlog/listbypilot/${pilotId}`,
+    }).then(({ data }) => {
+      setFlightlogs(data)
+    }).catch((error) => console.log(error))
   }, [pilotId])
 
   function handleSubmitFlightlog() {
     const data = {
-      name: nameRegistry
-    }
-    const data2 = {
       name: nameRegistry,
       project: selectedProject,
       categorie: selectedCategorie,
       brand: selectedBrand,
       model: selectedModel,
       flighttime: timeFlightLog,
-      takeoff
+      takeoff,
+      PilotId: pilotId
     }
-    console.log(data2)
+    console.log(data)
     axios({
       method: 'POST',
       baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
       url: `/pilot/flightlog/create`,
-      data: data2
+      data: data
     }).then(({ data }) => {
       setFlightlogs( flightlogs.concat(data) )
       setToogleAdd(!toogleAdd)
@@ -106,6 +112,38 @@ export const Flightlogs = ({ navigation, route}) => {
     setSelectedBrand(itemBrand)
     setCurrModels(Drones.filter(e => e.brand === itemBrand)[0].models)
   }
+
+  function handleDeleteFlightlog(idProject) {
+    axios({
+      method: 'DELETE',
+      baseURL: `${Expo.Constants.manifest.extra.servidorb}`,
+      url: `/pilot/flightlog/deleteandlist/${idProject}`
+    }).then(({ data }) => {
+      setFlightlogs( data )
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  function headAccordion(item){
+    return(
+      <View style={styles.containerHeadAccordion}>
+        <Text style={{color: 'white', padding:8}}>{item.name}</Text>
+        <TouchableOpacity onPress={()=>{ handleDeleteFlightlog(item.id) }}>
+            <Icon name={'trash'} size={18} color={'white'} style={{marginRight:10, marginLeft:10}}/>
+        </TouchableOpacity> 
+      </View>
+    )
+  }
+
+  function bodyAccordion(item){
+    return (
+      <View style={{padding:10, backgroundColor:'white'}}>
+        <Text style={{textAlign:'center'}}>Aaron  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</Text>
+      </View>
+    )
+  }
+
   return (
     <ScrollView style={{flexDirection: 'column'}}>
       <View style={{ backgroundColor: '#F5F5F5', height: 750}}>
@@ -120,7 +158,7 @@ export const Flightlogs = ({ navigation, route}) => {
           <CollapseBody style={{alignItems: "center"}}>
             <TextInput
               placeholder="Nombre del registro"
-              onChangeText={text => setRegistry(text)}
+              onChangeText={text => setNameRegistry(text)}
               value={nameRegistry}
               style={styles.inputText}
             />
@@ -188,6 +226,14 @@ export const Flightlogs = ({ navigation, route}) => {
             </View>
           </CollapseBody>
         </Collapse>
+        <View style={{backgroundColor: 'white'}}>
+          <AccordionList
+            list={projects}
+            header={headAccordion}
+            body={bodyAccordion}
+            keyExtractor={item => `${item.id}`}
+          />
+        </View>
       </View>
     </ScrollView>
   )
@@ -204,6 +250,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     marginTop: 25,
     height: 750
+  },
+  containerHeadAccordion: {
+    width: '100%',
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+    backgroundColor:'#004C99',
+    borderColor: 'white',
+    borderBottomWidth:1
   },
   containerProfile: {
     height: 51,
